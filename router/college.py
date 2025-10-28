@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 import schemas,database
 from crud import college_crud
 from typing import Optional
-from auth.dependencies import require_roles,get_current_user
+from auth.dependencies import get_current_user,require_roles
 
 college_router = APIRouter(prefix="/colleges",tags=["colleges"])
 

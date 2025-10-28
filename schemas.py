@@ -1,6 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 from typing import List, Optional
 from enum import Enum as PyEnum
+from datetime import date
+from models import AttendanceStatus
+
+
 
 
 class CollegeCreate(BaseModel):
@@ -88,7 +92,47 @@ class UserCreate(BaseModel):
     email: str
     password: str
     role: RoleEnum
+    
+class AttendanceCreate(BaseModel):
+    student_id: int
+    date: date
+    status: AttendanceStatus
+    remarks: Optional[str] = None
+    
+class AttendanceResponse(BaseModel):
+    id: int
+    student_id: int
+    date: date
+    status: AttendanceStatus
+    marked_by: Optional[int]
+    remarks: Optional[str]
 
+    class Config:
+        from_attributes = True
+
+class StaffCreate(BaseModel):
+    employee_no: str
+    department: Optional[str] = None
+    designation: Optional[str] = None
+    joined_at: Optional[date] = None
+    user_id: int  
+
+class StaffUpdate(BaseModel):
+    employee_no: Optional[str] = None
+    department: Optional[str] = None
+    designation: Optional[str] = None
+    joined_at: Optional[date] = None
+
+
+class StaffResponse(BaseModel):
+    id: int
+    employee_no: str
+    department: Optional[str] = None
+    designation: Optional[str] = None
+    joined_at: Optional[date] = None
+
+    class Config:
+        from_attributes = True
 
 
 
